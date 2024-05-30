@@ -6,10 +6,10 @@
 #include "i2c-host.h"
 //#include "i2c-client.h"
 
-#define test2
+#define test3
 
 int main() {
-    initUartHW(500000UL);
+    initUartHW(9600);
 	setupI2cSoftHost();
     uint8_t adr = 2;
 	_delay_ms(100);
@@ -48,6 +48,9 @@ int main() {
         stopI2c();
         printSeriel("%d %d %d %d\n", data[0], data[1], data[2], data[3]);
         
+#endif
+#ifdef test3
+    uart_Transmit_Hard(adr++);
 #endif
         _delay_ms(1000);
 	}	
