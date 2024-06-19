@@ -9,7 +9,7 @@
 #define test3
 
 int main() {
-    initUartHW(9600);
+    initUartHW(256000);
 	setupI2cSoftHost();
     uint8_t adr = 2;
 	_delay_ms(100);
@@ -50,7 +50,15 @@ int main() {
         
 #endif
 #ifdef test3
-    uart_Transmit_Hard(adr++);
+data[0] = 0b11100000;
+    data[3] *= 2;
+    if (data[3] == 0)
+        data[3] = 1;
+    data[2]--;
+    data[1]++;
+    //printSeriel("%d%d%d%d", data[0], data[1], data[2], data[3]);
+    for (uint8_t i = 0; i < 4; ++i)
+        uart_Transmit_Hard(data[i]);
 #endif
         _delay_ms(1000);
 	}	
